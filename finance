@@ -1,0 +1,258 @@
+#HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Management for Students</title>
+  <link rel="stylesheet" href="finance.css">
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <div class="logo">
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/015/577/374/small_2x/business-finance-logo-template-vector.jpg" alt="Financial Logo">
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <button onclick="search()">Search</button>
+      </div>
+    </div>
+    <h1>Financial Management for Students</h1>
+  </header>
+
+  <section id="budget">
+    <h2>Budgeting Tools</h2>
+    <label for="budgetAmount">Enter your monthly budget:</label>
+    <input type="number" id="budgetAmount" placeholder="Enter amount">
+    <button onclick="setBudget()">Set Budget</button>
+  </section>
+
+  <section id="expenses">
+    <h2>Expense Tracking</h2>
+    <label for="expenseAmount">Enter your expense:</label>
+    <input type="number" id="expenseAmount" placeholder="Enter amount">
+    <button onclick="trackExpense()">Track Expense</button>
+    <div id="expenseList"></div>
+  </section>
+
+  <section id="goals">
+    <h2>Goals</h2>
+    <label for="goalAmount">Set a financial goal:</label>
+    <input type="number" id="goalAmount" placeholder="Enter amount">
+    <button onclick="setGoal()">Set Goal</button>
+    <div id="progress"></div>
+  </section>
+
+  <section id="resources">
+    <h2>Financial Education Resources</h2>
+    <ul>
+      <li><a href="#">Budgeting Tips</a></li>
+      <li><a href="#">Saving Strategies</a></li>
+      <li><a href="#">Investment Basics</a></li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 Financial Management for Students</p>
+  </footer>
+
+  <script src="finance.js"></script>
+</body>
+</html>
+
+
+#CSS
+/* finance.css */
+
+/* Resetting default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Body styles */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+  }
+  
+  /* Header styles */
+  header {
+    background-color: #6f4e37;
+    color: #000000;
+    padding: 20px;
+  }
+  
+  /* Navbar styles */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .logo img {
+    width: 80px;
+    height: auto;
+  }
+  
+  nav ul {
+    list-style-type: none;
+  }
+  
+  nav ul li {
+    display: inline-block;
+    margin-right: 50px;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  nav ul li a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Search bar styles */
+  .search-bar {
+    display: flex;
+  }
+  
+  .search-bar input[type="text"] {
+    padding: 8px;
+    width: 200px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+  }
+  
+  .search-bar button {
+    padding: 8px 15px;
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+  }
+  
+  .search-bar button:hover {
+    background-color: #003d80;
+  }
+  
+  /* Main sections styles */
+  section {
+    background-color: #fff;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input[type="number"] {
+    padding: 8px;
+    width: calc(100% - 110px);
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  #expenseList {
+    margin-top: 10px;
+  }
+  
+  #expenseList p {
+    margin-bottom: 5px;
+  }
+  
+  #progress {
+    margin-top: 10px;
+  }
+  
+  ul {
+    list-style-type: none;
+  }
+  
+  ul li {
+    margin-bottom: 5px;
+  }
+  
+  footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #007bff;
+    color: #fff;
+  }
+
+
+
+# java Script
+// finance.js
+
+let monthlyBudget = 0;
+let expenses = [];
+let goalAmount = 0;
+
+function setBudget() {
+  const budgetInput = document.getElementById('budgetAmount');
+  monthlyBudget = parseInt(budgetInput.value);
+  budgetInput.value = '';
+  alert('Budget set successfully!');
+}
+
+function trackExpense() {
+  const expenseInput = document.getElementById('expenseAmount');
+  const expenseAmount = parseInt(expenseInput.value);
+  expenses.push(expenseAmount);
+  expenseInput.value = '';
+  updateExpenseList();
+}
+
+function updateExpenseList() {
+  const expenseList = document.getElementById('expenseList');
+  expenseList.innerHTML = '<h3>Expenses:</h3>';
+  let totalExpenses = 0;
+  for (let i = 0; i < expenses.length; i++) {
+    totalExpenses += expenses[i];
+    expenseList.innerHTML += `<p>$${expenses[i]}</p>`;
+  }
+  expenseList.innerHTML += `<strong>Total: $${totalExpenses}</strong>`;
+  checkOverspending(totalExpenses);
+}
+
+function checkOverspending(totalExpenses) {
+  if (totalExpenses > monthlyBudget) {
+    alert('Warning: You have exceeded
